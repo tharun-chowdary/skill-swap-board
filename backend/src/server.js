@@ -1,3 +1,5 @@
+const skillRoutes = require("./routes/skillRoutes");
+
 const express = require("express");
 
 const app = express();
@@ -6,7 +8,7 @@ const PORT = 5000;
 
 // Middleware
 app.use(express.json());
-
+app.use("/api/skills", skillRoutes);
 // Test route
 app.get("/", (req, res) => {
     res.json({

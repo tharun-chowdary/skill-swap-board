@@ -21,14 +21,14 @@ const getAllSkills = () => {
 };
 
 const getSkillById = (id) => {
-    return skills.find(skill => skill.id === id);
+    return skills.find(skill => skill.id === Number(id));
 };
 
 const createSkill = (name, category) => {
     const newSkill = {
         id: skills.length + 1,
-        name,
-        category
+        name: name,
+        category: category
     };
 
     skills.push(newSkill);
@@ -37,15 +37,13 @@ const createSkill = (name, category) => {
 };
 
 const deleteSkill = (id) => {
-    const skillExists = skills.some(skill => skill.id === id);
+    const index = skills.findIndex(skill => skill.id === Number(id));
 
-    if (!skillExists) {
-        return false;
+    if (index === -1) {
+        return null;
     }
 
-    skills = skills.filter(skill => skill.id !== id);
-
-    return true;
+    return skills.splice(index, 1)[0];
 };
 
 module.exports = {

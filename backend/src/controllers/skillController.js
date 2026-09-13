@@ -7,9 +7,7 @@ const getAllSkills = (req, res) => {
 };
 
 const getSkillById = (req, res) => {
-    const id = Number(req.params.id);
-
-    const skill = skillService.getSkillById(id);
+    const skill = skillService.getSkillById(req.params.id);
 
     if (!skill) {
         return res.status(404).json({
@@ -35,18 +33,17 @@ const createSkill = (req, res) => {
 };
 
 const deleteSkill = (req, res) => {
-    const id = Number(req.params.id);
+    const deletedSkill = skillService.deleteSkill(req.params.id);
 
-    const deleted = skillService.deleteSkill(id);
-
-    if (!deleted) {
+    if (!deletedSkill) {
         return res.status(404).json({
             message: "Skill not found"
         });
     }
 
     res.json({
-        message: "Skill deleted successfully"
+        message: "Skill deleted successfully",
+        skill: deletedSkill
     });
 };
 
